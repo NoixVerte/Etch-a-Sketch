@@ -24,7 +24,12 @@ function generateGrid(squareNumber) {
         square.style.width = wrapper.clientWidth/squareNumber + "px";
         square.style.height = wrapper.clientHeight/squareNumber + "px";
         square.addEventListener("mouseover", () => {
-            square.style.background = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
+            if (!square.style.background) {
+                square.style.background = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
+                square.style.opacity = 0.1;
+            } else {
+                square.style.opacity = (parseFloat(square.style.opacity) + 0.1).toString();
+            }
         })
         wrapper.appendChild(square);
     }
