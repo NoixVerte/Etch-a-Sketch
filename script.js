@@ -8,11 +8,10 @@ button.addEventListener("click", () => {
     let input;
     do {
         input = prompt("Write the number of squares you'd like to have per side");
-        console.log(input);
         if (input < 0 || input === 0 || input > 100) alert("The number needs to be between 1 and 100!");
     } 
     while (input < 0 || input === 0 || input > 100);
-    if (input !== null && (input < 0 || input === 0 || input > 100)) {
+    if (input !== null && !(input < 0 || input === 0 || input > 100)) {
         wipeGrid();
         generateGrid(input);
     }
@@ -25,10 +24,9 @@ function generateGrid(squareNumber) {
         square.style.width = wrapper.clientWidth/squareNumber + "px";
         square.style.height = wrapper.clientHeight/squareNumber + "px";
         square.addEventListener("mouseover", () => {
-            square.style.background = "gray";
+            square.style.background = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
         })
         wrapper.appendChild(square);
-        console.log("Square created!");
     }
 }
 
