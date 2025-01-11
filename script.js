@@ -8,11 +8,14 @@ button.addEventListener("click", () => {
     let input;
     do {
         input = prompt("Write the number of squares you'd like to have per side");
-        if (input == 0 || input > 100) alert("The number needs to be between 1 and 100!");
+        console.log(input);
+        if (input < 0 || input === 0 || input > 100) alert("The number needs to be between 1 and 100!");
     } 
-    while (input == 0 || input > 100)
-    wipeGrid();
-    generateGrid(input);
+    while (input < 0 || input === 0 || input > 100);
+    if (input !== null && (input < 0 || input === 0 || input > 100)) {
+        wipeGrid();
+        generateGrid(input);
+    }
 })
 
 function generateGrid(squareNumber) {
