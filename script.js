@@ -17,20 +17,25 @@ button.addEventListener("click", () => {
     }
 })
 
+wrapper.addEventListener("mouseover", (event) => {
+    let target = event.target;
+    if (!target.hasChildNodes()) {
+        if (!target.style.background) {
+            target.style.background = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
+            target.style.opacity = 0.1;
+        } else {
+            target.style.opacity = (parseFloat(target.style.opacity) + 0.1).toString();
+        }
+    }
+})
+
 function generateGrid(squareNumber) {
     for (let i = 0; i < squareNumber*squareNumber; i++) {
+        console.log("added a square!");
         let square = document.createElement("div");
         square.classList.add("squares");
         square.style.width = wrapper.clientWidth/squareNumber + "px";
         square.style.height = wrapper.clientHeight/squareNumber + "px";
-        square.addEventListener("mouseover", () => {
-            if (!square.style.background) {
-                square.style.background = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
-                square.style.opacity = 0.1;
-            } else {
-                square.style.opacity = (parseFloat(square.style.opacity) + 0.1).toString();
-            }
-        })
         wrapper.appendChild(square);
     }
 }
