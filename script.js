@@ -30,14 +30,18 @@ wrapper.addEventListener("mouseover", (event) => {
 })
 
 function generateGrid(squareNumber) {
+    const fragment = document.createDocumentFragment();
+    let squareHeight = wrapper.clientHeight/squareNumber + "px";
+    let squareWidth  =  wrapper.clientWidth/squareNumber + "px";
     for (let i = 0; i < squareNumber*squareNumber; i++) {
         console.log("added a square!");
-        let square = document.createElement("div");
+        const square = document.createElement("div");
         square.classList.add("squares");
-        square.style.width = wrapper.clientWidth/squareNumber + "px";
-        square.style.height = wrapper.clientHeight/squareNumber + "px";
-        wrapper.appendChild(square);
+        square.style.height = squareHeight;
+        square.style.width = squareWidth;
+        fragment.appendChild(square);
     }
+    wrapper.appendChild(fragment);
 }
 
 function wipeGrid() {
