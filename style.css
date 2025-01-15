@@ -9,9 +9,27 @@ body {
 }
 
 #wrapper {
-    height: 960px;
-    width: 960px;
+    height: 600px;
+    width: 600px;
     display: flex;
     border: 2px solid black;
     flex-wrap: wrap;
+}
+
+button {
+    margin: 10px;
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    border-radius: 2px;
+    height: 30px;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: lightgray;
+}
+
+button:active {
+    background-color: gray;
 }

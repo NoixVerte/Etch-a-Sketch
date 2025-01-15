@@ -1,10 +1,15 @@
 const wrapper = document.querySelector("#wrapper");
-const button = document.querySelector("button");
-const defaultSquareNumber = 16;
+const sizeButton = document.querySelector("#size-button");
+const blackButton = document.querySelector("#change-color-black");
+const rainbowButton = document.querySelector("#change-color-rainbow");
+const saturationButon  = document.querySelector("#change-saturation");
+let mode = "black";
+let changeSaturation = false;
+let squareNumber = 16;
 
-generateGrid(defaultSquareNumber);
+generateGrid(squareNumber);
 
-button.addEventListener("click", () => {
+sizeButton.addEventListener("click", () => {
     let input;
     do {
         input = prompt("Write the number of squares you'd like to have per side");
@@ -12,18 +17,38 @@ button.addEventListener("click", () => {
     } 
     while (input < 0 || input === 0 || input > 100);
     if (input !== null && !(input < 0 || input === 0 || input > 100)) {
+        squareNumber = input;
         wipeGrid();
-        generateGrid(input);
     }
+})
+
+blackButton.addEventListener("click", () => {
+    mode = "black"
+})
+
+rainbowButton.addEventListener("click", () => {
+    mode = "Rainbow";
+})
+
+saturationButon.addEventListener("click", () => {
+    changeSaturation = !changeSaturation;
 })
 
 wrapper.addEventListener("mouseover", (event) => {
     let target = event.target;
     if (!target.hasChildNodes()) {
         if (!target.style.background) {
-            target.style.background = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
-            target.style.opacity = 0.1;
-        } else {
+            if (mode == "Rainbow") {
+                if (changeSaturation) {
+                    target.style.background = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
+                    target.style.opacity = 0.1;
+                } else {
+                    target.style.background = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
+                }
+            } else {
+                target.style.background = mode;
+            }
+        } else if (changeSaturation) {
             target.style.opacity = (parseFloat(target.style.opacity) + 0.1).toString();
         }
     }
@@ -48,4 +73,5 @@ function wipeGrid() {
     while (wrapper.hasChildNodes()) {
         wrapper.firstChild.remove();
     }
+    generateGrid(squareNumber);
 }
